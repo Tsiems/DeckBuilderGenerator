@@ -1,0 +1,67 @@
+{
+  "name": "custom-deck-builder",
+  "author": {
+    "name": "Travis Siems"
+  },
+  "homepage": "https://github.com/Tsiems/Custom-Deck-Builder",
+  "version": "1.0.0",
+  "description": "Custom Deck Builder",
+  "private": true,
+  "dependencies": {
+    "@babel/core": "^7.0.0",
+    "@pixi/utils": "^7.2.4",
+    "ag-grid": "^18.1.2",
+    "babel-loader": "^9.1.3",
+    "buffer": "^6.0.3",
+    "css-loader": "^6.8.1",
+    "csv-parse": "^5.5.0",
+    "file-loader": "^6.2.0",
+    "file-saver": "^2.0.5",
+    "fontfaceobserver": "^2.0.13",
+    "handlebars": "^4.0.10",
+    "handlebars-loader": "^1.5.0",
+    "html-loader": "^4.2.0",
+    "html-webpack-plugin": "^5.5.3",
+    "jszip": "^3.1.3",
+    "markdown-loader": "^8.0.0",
+    "node-sass": "^9.0.0",
+    "normalize.css": "^8.0.1",
+    "path-browserify": "^1.0.1",
+    "pixi.js": "^7.0.0",
+
+    "process": "^0.11.10",
+    "raw-loader": "^4.0.2",
+    "sass-loader": "^13.3.2",
+    "store": "^2.0.12",
+    "stream-browserify": "^3.0.0",
+    "style-loader": "^3.3.3",
+    "ts-loader": "^9.4.4",
+    "uuid": "^9.0.0",
+    "webpack": "^5.0.0"
+  },
+  "directories": {},
+  "scripts": {
+    "dev": "webpack-dev-server --progress --host 0.0.0.0 --port 8080 --static built/",
+    "build": "webpack --progress",
+    "lint": "tslint -c tslint.json 'src/**/*.ts'",
+    "fix": "tslint -c tslint.json 'src/**/*.ts' --fix --force"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.22.15",
+    "@types/csv-parse": "^1.1.8",
+    "@types/file-saver": "^2.0.5",
+    "@types/fontfaceobserver": "^2.1.0",
+    "@types/handlebars": "^4.0.33",
+    "@types/jszip": "^3.4.1",
+    "@types/node": "^20.6.0",
+    "@types/storejs": "^2.0.3",
+    "@types/uuid": "^9.0.3",
+    "@types/webpack-env": "^1.13.0",
+    "eslint": "^8.49.0",
+    "tslint": "^6.1.3",
+    "tslint-eslint-rules": "^5.4.0",
+    "typescript": "^5.2.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  }
+}
