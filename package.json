@@ -1,11 +1,11 @@
 {
-  "name": "custom-deck-builder",
+  "name": "deck-builder-generator",
   "author": {
     "name": "Travis Siems"
   },
-  "homepage": "https://github.com/Tsiems/Custom-Deck-Builder",
+  "homepage": "https://tsiems.github.io/DeckBuilderGenerator",
   "version": "1.0.0",
-  "description": "Custom Deck Builder",
+  "description": "Deck Builder Generator",
   "private": true,
   "dependencies": {
     "@babel/core": "^7.0.0",
@@ -28,7 +28,6 @@
     "normalize.css": "^8.0.1",
     "path-browserify": "^1.0.1",
     "pixi.js": "^7.0.0",
-
     "process": "^0.11.10",
     "raw-loader": "^4.0.2",
     "sass-loader": "^13.3.2",
@@ -44,7 +43,9 @@
     "dev": "webpack-dev-server --progress --host 0.0.0.0 --port 8080 --static built/",
     "build": "webpack --progress",
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
-    "fix": "tslint -c tslint.json 'src/**/*.ts' --fix --force"
+    "fix": "tslint -c tslint.json 'src/**/*.ts' --fix --force",
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d build"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.22.15",
@@ -58,6 +59,7 @@
     "@types/uuid": "^9.0.3",
     "@types/webpack-env": "^1.13.0",
     "eslint": "^8.49.0",
+    "gh-pages": "^6.0.0",
     "tslint": "^6.1.3",
     "tslint-eslint-rules": "^5.4.0",
     "typescript": "^5.2.2",
