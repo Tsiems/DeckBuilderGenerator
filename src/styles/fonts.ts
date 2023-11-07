@@ -7,7 +7,7 @@ const fonts: {[key: string]: string[]} = {
     // CompactaBT: ["regular", "bold", "italics"],
     // CompactaBdBT: ["regular", "bold"],
     // Arial: ["regular", "bold", "italics"],
-    TradeGothic: ["regular", "bold", "italics"],
+    // TradeGothic: ["regular", "bold", "italics"],
 };
 
 const ready: {[key: string]: boolean} = {};

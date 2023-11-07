@@ -3,7 +3,7 @@
 @import "src/styles/range.scss";
 
 @mixin font-defaults() {
-    font-family: TradeGothic, Verdana, Geneva, sans-serif;
+    font-family: Verdana, Geneva, sans-serif; // TradeGothic
     font-size: 1em;
     letter-spacing: -0.025em;
 }
