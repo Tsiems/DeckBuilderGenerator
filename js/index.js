@@ -2967,8 +2967,8 @@ var uiTemplate = (0, utils_1.template)(hbs);
 var UI = /*#__PURE__*/_createClass(function UI(element) {
   var _this = this;
   _classCallCheck(this, UI);
-  this.title = "Cryptozoic Game Engine";
-  this.subtitle = "Custom Deck Builder";
+  this.title = "WoT - Cryptozoic Game Engine";
+  this.subtitle = "Deck Builder Generator";
   this.tabsChanging = true;
   this.parent = element;
   this.element = uiTemplate(this);
@@ -3090,7 +3090,6 @@ exports.initialize = exports.initialTexturesToKey = exports.initialTextures = vo
 var path_1 = __webpack_require__(/*! path */ "./node_modules/path-browserify/index.js");
 var PIXI = __webpack_require__(/*! pixi.js */ "./node_modules/pixi.js/lib/index.js");
 var fonts_1 = __webpack_require__(/*! src/styles/fonts */ "./src/styles/fonts.ts");
-var path = "../resources/card-templates/";
 __webpack_require__("./resources/card-images sync recursive \\.png$");
 __webpack_require__("./resources/images sync recursive \\.png$");
 var r = __webpack_require__("./resources/card-templates sync recursive \\.png$");
@@ -3418,6 +3417,7 @@ exports.doesCircleOverlapRectangle = doesCircleOverlapRectangle;
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
+/* provided dependency */ var process = __webpack_require__(/*! process/browser */ "./node_modules/process/browser.js");
 
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -3458,8 +3458,9 @@ Object.defineProperty(exports, "__esModule", ({
 exports.autoSizeAndWrapStyledText = exports.wrapStyledText = exports.wrapStyledTextCharacters = exports.loadTextures = exports.newSprite = void 0;
 var PIXI = __webpack_require__(/*! pixi.js */ "./node_modules/pixi.js/lib/index.js");
 var math_1 = __webpack_require__(/*! ./math */ "./src/utils/math.ts");
+var baseUrl = process.env.PUBLIC_URL || '/';
 var getTexturePath = function getTexturePath(textureKey) {
-  return "/resources/" + textureKey + ".png";
+  return baseUrl + "resources/" + textureKey + ".png";
 };
 function newSprite(textureKey, container) {
   return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
