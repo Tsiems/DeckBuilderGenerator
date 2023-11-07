@@ -19,9 +19,9 @@ export const CardOptionsList: ICardOption[] = [
     {
         name: "Type",
         type: "text",
-        description: `The card type. Must be "Equipment", "Hero", "Location", `
-                   + `"Starter", "Super Power", "Villain", or "Weakness". `
-                   + `Alternatively "Super Hero" or "Super Villain" are `
+        description: `The card type. Must be "Equipment", "Ally", "Location", `
+                   + `"Starter", "Tactic", "Shadowspawn", or "Weakness". `
+                   + `Alternatively "Hero" or "Shadow" are `
                    + `shorthand for their oversized versions`,
     },
     {
@@ -29,15 +29,15 @@ export const CardOptionsList: ICardOption[] = [
         type: "checkbox",
         description: `If enabled, the card's textbox will be black instead of `
                    + `white, such as for the Villain Stack. If the type is `
-                   + `"Hero" or "Villain", then they also gain the special `
-                   + `"Super Hero/Villain" subtype. This option has no effect `
+                   + `"Ally" or "Shadowspawn", then they also gain the special `
+                   + `"Hero/Shadow" subtype. This option has no effect `
                    + `on Oversized card`,
     },
     {
         name: "Oversized",
         type: "checkbox",
         description: `If enabled, the card becomes an oversized player card. `
-                   + `This option is only valid for "Hero" and "Villain" types,`
+                   + `This option is only valid for "Ally" and "Shadowspawn" types,`
                    + ` and Sub Type, Cost, and Victory Points are ignored.`,
     },
     {

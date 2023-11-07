@@ -13,8 +13,8 @@ export const CARD_MAX_WIDTH = 900;
 /** The maximum height (in pixels) that a card can be (oversized) */
 export const CARD_MAX_HEIGHT = 1200;
 
-export type CardType = "Equipment" | "Hero" | "Location" | "Starter" |
-"Super Power" | "Villain" | "Weakness" | "Super Villain" | "Super Hero"
+export type CardType = "Equipment" | "Ally" | "Location" | "Starter" |
+"Tactic" | "Shadowspawn" | "Weakness" | "Shadow" | "Hero"
 
 
 /**
@@ -128,19 +128,19 @@ export class Card {
             }
         }
 
-        // special cases, we can take "Super Hero/Villain" as a type
+        // special cases, we can take "Hero/Shadow" as a type
         // (which is invalid) and make it the oversized version
-        if (this.type === "Super Hero") {
-            this.type = "Hero";
+        if (this.type === "Hero") {
+            this.type = "Ally";
             this.oversized = true;
         }
-        else if (this.type === "Super Villain") {
-            this.type = "Villain";
+        else if (this.type === "Shadow") {
+            this.type = "Shadowspawn";
             this.oversized = true;
         }
 
-        const isHeroOrVillain = this.type === "Hero" || this.type === "Villain";
-        if (this.oversized && !isHeroOrVillain) {
+        const isAllyOrShadowspawn = this.type === "Ally" || this.type === "Shadowspawn";
+        if (this.oversized && !isAllyOrShadowspawn) {
             this.oversized = false;
         }
 
@@ -299,8 +299,11 @@ export class Card {
 
         let backgroundType: string = this.type;
         if (this.variant || this.oversized) {
-            if (this.type === "Hero" || this.type === "Villain") {
-                backgroundType = `Super-${this.type}`;
+            if (this.type === "Ally") {
+                backgroundType = `Hero`;
+            }
+            else if (this.type === "Shadowspawn") {
+                backgroundType = `Shadow`;
             }
         }
         if (this.oversized) {
@@ -390,14 +393,6 @@ export class Card {
     }
 
     private getTypeName(): string {
-        // TODO: change types to ally/darkfriend
-        if (this.type === 'Hero') {
-            return "ALLY";
-        }
-        if (this.type === 'Villain') {
-            return "DARKFRIEND";
-        }
-
         return this.type.toUpperCase();
     }
 

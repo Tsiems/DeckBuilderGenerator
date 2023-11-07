@@ -59,3 +59,5 @@ typings/
 
 # webpack builds
 built/
+
+.DS_Store

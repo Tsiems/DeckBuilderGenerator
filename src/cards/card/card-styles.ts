@@ -29,7 +29,8 @@ const styles: {
             fill: "#000000",
             // fontFamily: "CompactaBT",
             // fontFamily: "Trebuchet MS",
-            fontFamily: "Arial Narrow",
+            // fontFamily: "Arial Narrow",
+            fontFamily: "Baskerville",
             fontSize: 32,
             lineJoin: "round",
         },
@@ -37,7 +38,8 @@ const styles: {
         cost: {
             fill: "#000000",
             // fontFamily: "CompactaBdBT",
-            fontFamily: "Arial Narrow",
+            // fontFamily: "Arial Narrow",
+            // fontFamily: "Herculanum",
             fontSize: 91.67,
             fontWeight: "bold",
             letterSpacing: 0.06,
@@ -52,7 +54,8 @@ const styles: {
             dropShadowColor: "#000000",
             dropShadowDistance: 12,
             fill: "#ffffff",
-            fontSize: 72,
+            // fontSize: 72,
+            fontSize: 64,
             letterSpacing: -2,
             padding: 100,
         },
@@ -108,7 +111,8 @@ const styles: {
         },
         name: {
             fill: "#ffc70e",
-            fontSize: 108.33,
+            // fontSize: 108.33,
+            fontSize: 80,
             letterSpacing: -1,
         },
         set: {
@@ -136,13 +140,13 @@ const styles: {
         },
     },
 
-    Hero: {
+    Ally: {
         name: {
             fill: "#00a5e3",
         },
     },
 
-    SuperPower: {
+    Tactic: {
         name: {
             fill: "#f77d27",
         },
@@ -151,7 +155,7 @@ const styles: {
         },
     },
 
-    Villain: {
+    Shadowspawn: {
         name: {
             fill: "#ed2122",
         },
