@@ -3417,7 +3417,6 @@ exports.doesCircleOverlapRectangle = doesCircleOverlapRectangle;
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
-/* provided dependency */ var process = __webpack_require__(/*! process/browser */ "./node_modules/process/browser.js");
 
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -3458,9 +3457,8 @@ Object.defineProperty(exports, "__esModule", ({
 exports.autoSizeAndWrapStyledText = exports.wrapStyledText = exports.wrapStyledTextCharacters = exports.loadTextures = exports.newSprite = void 0;
 var PIXI = __webpack_require__(/*! pixi.js */ "./node_modules/pixi.js/lib/index.js");
 var math_1 = __webpack_require__(/*! ./math */ "./src/utils/math.ts");
-var baseUrl = process.env.PUBLIC_URL || '/';
 var getTexturePath = function getTexturePath(textureKey) {
-  return baseUrl + "resources/" + textureKey + ".png";
+  return "resources/" + textureKey + ".png";
 };
 function newSprite(textureKey, container) {
   return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
