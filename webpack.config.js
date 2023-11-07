@@ -143,7 +143,7 @@ module.exports = {
     plugins: [
         // generate for us our index.html page
         new HtmlWebpackPlugin({
-            title: "Loading Custom Deck Builder...",
+            title: "Loading Deck Builder Generator...",
         }),
         new webpack.ProvidePlugin({
             Buffer: ['buffer', 'Buffer'],

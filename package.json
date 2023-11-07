@@ -45,7 +45,7 @@
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "fix": "tslint -c tslint.json 'src/**/*.ts' --fix --force",
     "predeploy": "yarn run build",
-    "deploy": "gh-pages -d built"
+    "deploy": "PUBLIC_URL=/DeckBuilderGenerator/ gh-pages -d built"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.22.15",

@@ -3,7 +3,6 @@ import * as PIXI from "pixi.js";
 import { onFontsLoaded } from "src/styles/fonts";
 
 // MAKE THESE THE SAME
-const path = "../resources/card-templates/";
 require.context("../resources/card-images", true, /\.png$/)
 require.context("../resources/images", true, /\.png$/)
 const r = require.context("../resources/card-templates", true, /\.png$/)

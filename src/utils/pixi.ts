@@ -3,15 +3,15 @@ import * as PIXI from "pixi.js";
 // import { Loader } from '@pixi/loaders';
 
 import { doesCircleOverlapRectangle, doRectanglesOverlap } from "./math";
-import path = require("path");
-import { sleep } from ".";
+
+const baseUrl = process.env.PUBLIC_URL || '/';
 
 
 const getTexturePath = (textureKey: string): string => {
     // const r = require.context("../../resources/card-templates", true, /\.png$/)
     // return r.resolve("./" + textureKey + ".png");
     // return "test"
-    return "/resources/" + textureKey + ".png";
+    return baseUrl + "resources/" + textureKey + ".png";
     // return "http://localhost:8080/resources/2d4d1e08af008cfbf6dca8d1a4ad5e65.png";
 }
 

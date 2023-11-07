@@ -11,10 +11,10 @@ const uiTemplate = template(hbs as any);
  */
 export class UI {
     /** The main title of the UI */
-    public readonly title: string = "Cryptozoic Game Engine";
+    public readonly title: string = "WoT - Cryptozoic Game Engine";
 
     /** The subtitle to be placed below the UI */
-    public readonly subtitle: string = "Custom Deck Builder";
+    public readonly subtitle: string = "Deck Builder Generator";
 
     /** The parent element of the UI (probably the body of the document) */
     public readonly parent: HTMLElement;
