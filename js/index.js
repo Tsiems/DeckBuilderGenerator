@@ -757,7 +757,7 @@ var Card = /*#__PURE__*/function () {
               }
               return _context7.abrupt("return");
             case 2:
-              vpSign = this.victoryPoints < 0 ? "negative" : "normal";
+              vpSign = this.victoryPoints !== "*" && this.victoryPoints < 0 ? "negative" : "normal";
               _context7.next = 5;
               return (0, utils_1.newSprite)("background-vp-".concat(vpSign), this.container);
             case 5:
@@ -829,7 +829,7 @@ var Card = /*#__PURE__*/function () {
     key: "renderSet",
     value: function renderSet(copyright) {
       if (!this.set) {
-        return;
+        throw "set is null in renderSet function";
       }
       var style = this.getStyle("set");
       style.fill = this.setTextColor || "#ffffff";
@@ -1025,7 +1025,6 @@ var csvParse = __webpack_require__(/*! csv-parse */ "./node_modules/csv-parse/di
 var events_1 = __webpack_require__(/*! events */ "./node_modules/events/events.js");
 var JSZip = __webpack_require__(/*! jszip */ "./node_modules/jszip/dist/jszip.min.js");
 var PIXI = __webpack_require__(/*! pixi.js */ "./node_modules/pixi.js/lib/index.js");
-var initialize_1 = __webpack_require__(/*! src/initialize */ "./src/initialize.ts");
 var utils_1 = __webpack_require__(/*! src/utils/ */ "./src/utils/index.ts");
 var card_1 = __webpack_require__(/*! ./card */ "./src/cards/card/index.ts");
 var readmeText = __webpack_require__(/*! ./deck-builder-readme.txt */ "./src/cards/deck-builder-readme.txt");
@@ -1172,29 +1171,6 @@ var DeckBuilder = /*#__PURE__*/function (_events_1$EventEmitte) {
       });
     }
   }, {
-    key: "destroyPIXITextures",
-    value: function destroyPIXITextures(obj) {
-      if (obj instanceof PIXI.Sprite) {
-        if (!initialize_1.initialTexturesToKey.has(obj.texture)) {
-          obj.destroy(true);
-        }
-      }
-      if (obj instanceof PIXI.Container) {
-        var _iterator2 = _createForOfIteratorHelper(obj.children),
-          _step2;
-        try {
-          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-            var child = _step2.value;
-            this.destroyPIXITextures(child);
-          }
-        } catch (err) {
-          _iterator2.e(err);
-        } finally {
-          _iterator2.f();
-        }
-      }
-    }
-  }, {
     key: "renderCards",
     value: function renderCards(normalCards, oversizedCards) {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -1276,7 +1252,6 @@ var DeckBuilder = /*#__PURE__*/function (_events_1$EventEmitte) {
                 x = r % maxWidth;
                 y = Math.floor(r / maxWidth);
                 render = renders[r];
-                render.cacheAsBitmap = true;
                 app.stage.addChild(render);
                 if (scale !== 1) {
                   render.scale.set(scale);
@@ -1304,7 +1279,7 @@ var DeckBuilder = /*#__PURE__*/function (_events_1$EventEmitte) {
           zip.file(key, cardImages[key]);
         }
         zip.file("source-spreadsheet.csv", _this5.csvText);
-        zip.file("readme.txt", readmeText["default"].replace("{width}", _this5.maxWidth).replace("{height}", _this5.maxHeight));
+        zip.file("readme.txt", readmeText["default"].replace("{width}", _this5.maxWidth.toString()).replace("{height}", _this5.maxHeight.toString()));
         zip.generateAsync({
           type: "blob"
         }).then(function (content) {
@@ -2294,7 +2269,7 @@ exports.cardsHeadings = [{
   name: "Oversized",
   type: "boolean",
   transform: function transform(checked, row) {
-    if (checked && row.values.type !== "Ally" && row.values.type !== "Shadowspawn") {
+    if (row && row.values.type !== "Ally" && row.values.type !== "Shadowspawn") {
       return false;
     }
     return checked;
@@ -3454,7 +3429,7 @@ var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, gene
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.autoSizeAndWrapStyledText = exports.wrapStyledText = exports.wrapStyledTextCharacters = exports.loadTextures = exports.newSprite = void 0;
+exports.autoSizeAndWrapStyledText = exports.wrapStyledText = exports.wrapStyledTextCharacters = exports.newSprite = void 0;
 var PIXI = __webpack_require__(/*! pixi.js */ "./node_modules/pixi.js/lib/index.js");
 var math_1 = __webpack_require__(/*! ./math */ "./src/utils/math.ts");
 var getTexturePath = function getTexturePath(textureKey) {
@@ -3487,10 +3462,6 @@ function newSprite(textureKey, container) {
   }));
 }
 exports.newSprite = newSprite;
-var backlogTextures = new Set();
-var backlogCallbacks = [];
-function loadTextures(textures, callback) {}
-exports.loadTextures = loadTextures;
 exports.wrapStyledTextCharacters = {
   boldStart: String.fromCharCode(17),
   boldEnd: String.fromCharCode(18),
@@ -3590,7 +3561,7 @@ function wrapStyledText(text, width, normalStyle) {
       }
     }
     if (cutoff || newline) {
-      var pixiText = void 0;
+      var pixiText = null;
       if (currentLine) {
         pixiText = new PIXI.Text(currentLine, currentStyle);
         pixiLine.addChild(pixiText);
