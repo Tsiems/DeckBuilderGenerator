@@ -829,7 +829,7 @@ var Card = /*#__PURE__*/function () {
     key: "renderSet",
     value: function renderSet(copyright) {
       if (!this.set) {
-        throw "set is null in renderSet function";
+        return null;
       }
       var style = this.getStyle("set");
       style.fill = this.setTextColor || "#ffffff";
@@ -5057,7 +5057,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 // Module
-var code = "<h1 id=\"deckbuildergenerator\">DeckBuilderGenerator</h1>\n";
+var code = "<h1 id=\"deckbuildergenerator\">DeckBuilderGenerator</h1>\n<p>The site is deployed here: <a href=\"https://tsiems.github.io/DeckBuilderGenerator\">https://tsiems.github.io/DeckBuilderGenerator</a></p>\n<p>To install and run locally:</p>\n<pre><code>yarn install\nyarn run build\nyarn run dev\n</code></pre>\n<p>To deploy:</p>\n<pre><code>yarn run deploy\n</code></pre>\n";
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (code);
 
