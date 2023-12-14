@@ -71,7 +71,7 @@ export class UI {
         let startingTab = tabs[0];
         // if there is a hash, make the starting tab the tab with that id
         if (window.location.hash) {
-            startingTab = tabs.find((tab) => tab.id === window.location.hash.substr(1));
+            startingTab = tabs.find((tab) => tab.id === window.location.hash.substr(1))!;
         }
         this.tabular.setTabs(tabs, startingTab);
         this.tabular.setParent(this.mainElement);

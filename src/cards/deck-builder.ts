@@ -2,8 +2,7 @@ import * as csvParse from "csv-parse";
 import { EventEmitter } from "events";
 import * as JSZip from "jszip";
 import * as PIXI from "pixi.js";
-import { initialTextures, initialTexturesToKey } from "src/initialize";
-import { loadTextures, toCamelCase, tryToCast } from "src/utils/";
+import { toCamelCase, tryToCast } from "src/utils/";
 import { Card } from "./card";
 import * as readmeText from "./deck-builder-readme.txt";
 
@@ -263,26 +262,6 @@ export class DeckBuilder extends EventEmitter {
     }
 
     /**
-     * Recursively destroys all the PIXI display objects, and their children
-     * If their texture is not an initial texture, we tell pixi to remove it
-     * from memory
-     * @param obj - the object to destroy textures in
-     */
-    private destroyPIXITextures(obj: PIXI.DisplayObject): void {
-        if (obj instanceof PIXI.Sprite) {
-            if (!initialTexturesToKey.has(obj.texture)) {
-                obj.destroy(true);
-            }
-        }
-
-        if (obj instanceof PIXI.Container) {
-            for (const child of obj.children) {
-                this.destroyPIXITextures(child);
-            }
-        }
-    }
-
-    /**
      * Renders a set of cards. Chooses normal cards first
      * @param normalCards the array of normal cards that need to be rendered
      * @param oversizedCards the array of oversized cards that need to be
@@ -290,10 +269,8 @@ export class DeckBuilder extends EventEmitter {
      * @returns a promise that returns the PIXI application used to render cards
      */
     private async renderCards(normalCards: Card[], oversizedCards: Card[]): Promise<PIXI.Application | null> {
-        // return new Promise((resolve, reject) => {
         const cards = normalCards.length ? normalCards : oversizedCards;
         if (cards.length === 0) {
-            // resolve(null);
             return null;
         }
 
@@ -302,37 +279,16 @@ export class DeckBuilder extends EventEmitter {
 
         // find how many cards we can render in this batch
         let i = 0;
-        // const textures: Set<string> = new Set();
         const currentCards: Card[] = [];
         while (cards.length) {
             i++;
             const card = cards.shift();
             currentCards.push(card!);
 
-            // textures.add(card.imageURL);
-            // textures.add(card.logoURL);
-
             if (i === (maxWidth * maxHeight)) {
                 break; // impossible to fit more cards
             }
         }
-
-            // loadTextures(Array.from(textures), () => {
-                // const unloadedTextures: string[] = [];
-                // for (const texture of textures) {
-                //     const resource = PIXI.Loader.shared.resources[texture];
-
-                //     if (!resource || resource.error) {
-                //         unloadedTextures.push(texture);
-                //     }
-                // }
-
-                // if (unloadedTextures.length) {
-                //     // some cards will not render correctly.
-                //     // We will keep trying, but let's notify anyone who cares
-                //     const errorTextures = unloadedTextures.join(", ");
-                //     this.emit(DeckBuilder.EventSymbols.error, `Could not load textures: ${errorTextures}`);
-                // }
 
         this.emit(DeckBuilder.EventSymbols.batchTexturesLoaded);
 
@@ -388,7 +344,6 @@ export class DeckBuilder extends EventEmitter {
             const x = r % maxWidth;
             const y = Math.floor(r / maxWidth);
             const render = renders[r];
-            render.cacheAsBitmap = true;
 
             app.stage.addChild(render);
 
@@ -401,9 +356,6 @@ export class DeckBuilder extends EventEmitter {
             app.stage.addChild(render);
         }
 
-            // resolve(app);
-            // });
-        // });
         return app
     }
 
@@ -425,8 +377,8 @@ export class DeckBuilder extends EventEmitter {
 
             // add a readme explaining what all this is
             zip.file("readme.txt", readmeText.default
-                                   .replace("{width}", this.maxWidth)
-                                   .replace("{height}", this.maxHeight),
+                                   .replace("{width}", this.maxWidth.toString())
+                                   .replace("{height}", this.maxHeight.toString()),
             );
 
             zip.generateAsync({type: "blob"}).then((content: Blob) => {

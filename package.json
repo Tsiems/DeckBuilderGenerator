@@ -44,7 +44,7 @@
     "build": "webpack --progress",
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "fix": "tslint -c tslint.json 'src/**/*.ts' --fix --force",
-    "predeploy": "yarn run build",
+    "predeploy": "PUBLIC_URL=/DeckBuilderGenerator/ yarn run build",
     "deploy": "PUBLIC_URL=/DeckBuilderGenerator/ gh-pages -d built"
   },
   "devDependencies": {

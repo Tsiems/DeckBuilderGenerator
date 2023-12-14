@@ -1,4 +1,5 @@
 /* Useful mathematical functions */
+import * as PIXI from "pixi.js";
 
 /**
  * Clamps a number between a given minimum and maximum value

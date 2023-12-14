@@ -1,11 +1,10 @@
 import {
-    autoSizeAndWrapStyledText, loadTextures, newSprite, replaceAll,
-    surroundText, wrapStyledText, wrapStyledTextCharacters, sleep
+    autoSizeAndWrapStyledText, newSprite, replaceAll,
+    surroundText, wrapStyledText, wrapStyledTextCharacters
 } from "src/utils/";
 import { getStyle } from "./card-styles";
 
 import * as PIXI from 'pixi.js';
-import { Type } from "typescript";
 
 /** The maximum width (in pixels) that a card can be (oversized) */
 export const CARD_MAX_WIDTH = 900;
@@ -162,11 +161,9 @@ export class Card {
      */
     public render(): Promise<PIXI.Container> {
         return new Promise(async (resolve, reject) => {
-            // loadTextures([this.imageURL, this.logoURL], () => {
-                await this.renderSync();
+            await this.renderSync();
 
-                resolve(this.container);
-            // })
+            resolve(this.container);
         });
     }
 
@@ -491,7 +488,7 @@ export class Card {
             return;
         }
 
-        const vpSign = this.victoryPoints < 0 ? "negative" : "normal";
+        const vpSign = this.victoryPoints !== "*" && this.victoryPoints < 0 ? "negative" : "normal";
         await newSprite(`background-vp-${vpSign}`, this.container);
 
         if (this.victoryPoints === "*") {
@@ -563,7 +560,7 @@ export class Card {
             collisions,
             this.oversized,
             this.oversized,
-        );
+        )!;
 
         textContainer.position.set(x, y);
 
@@ -575,9 +572,9 @@ export class Card {
      * @param copyright the rendered copyright element to position from
      * @returns the rendered set element for future renders to position off
      */
-    private renderSet(copyright: PIXI.Container): PIXI.Container {
+    private renderSet(copyright: PIXI.Container): PIXI.Container | null {
         if (!this.set) {
-            return;
+            return null;
         }
 
         const style = this.getStyle("set");
@@ -656,12 +653,12 @@ export class Card {
      * @param set the already rendered set to position off
      * @param copyright the already rendered copyright to position off
      */
-    private renderLegal(set: PIXI.Container, copyright: PIXI.Container): void {
+    private renderLegal(set: PIXI.Container | null, copyright: PIXI.Container): void {
         let maxWidth = 332;
         let x = 223;
         let y = 954;
         const style = this.getStyle("legal");
-        let legal: PIXI.Container;
+        let legal: PIXI.Container | null;
         if (this.oversized) {
             maxWidth = 824;
             x = 37;

@@ -9,9 +9,9 @@
 function createNodeFromTemplate(
     required: (args: object) => string, args?: object): Node {
     const tempDiv = document.createElement("div");
-    tempDiv.innerHTML = required(args);
-    const node = tempDiv.firstChild;
-    node.parentElement.removeChild(node);
+    tempDiv.innerHTML = required(args!);
+    const node = tempDiv.firstChild!;
+    node.parentElement!.removeChild(node);
 
     return node;
 }

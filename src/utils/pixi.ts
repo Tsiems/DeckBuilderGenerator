@@ -2,18 +2,17 @@
 import * as PIXI from "pixi.js";
 // import { Loader } from '@pixi/loaders';
 
-import { doesCircleOverlapRectangle, doRectanglesOverlap } from "./math";
-
-const baseUrl = process.env.PUBLIC_URL || '/';
-
-
-const getTexturePath = (textureKey: string): string => {
     // const r = require.context("../../resources/card-templates", true, /\.png$/)
     // return r.resolve("./" + textureKey + ".png");
     // return "test"
-    return baseUrl + "resources/" + textureKey + ".png";
-    // return "http://localhost:8080/resources/2d4d1e08af008cfbf6dca8d1a4ad5e65.png";
+
+import { doesCircleOverlapRectangle, doRectanglesOverlap } from "./math";
+
+
+const getTexturePath = (textureKey: string): string => {
+    return "resources/" + textureKey + ".png";
 }
+// return "http://localhost:8080/resources/2d4d1e08af008cfbf6dca8d1a4ad5e65.png";
 
 /**
  * Creates a new sprite from a given resources key and placed into a parent
@@ -52,87 +51,6 @@ export async function newSprite(textureKey: string, container?: PIXI.Container):
     }
 
     return sprite;
-}
-
-// these variables are static scope level variables used to backlog textures
-// to load in case of multiple async loadTextures calls
-const backlogTextures = new Set<string>();
-const backlogCallbacks: Array<() => void> = [];
-
-/**
- * Loads a list of given urls to texture files then fires a callback if given.
- * If another loadTextures is in progress this call will be backlogged to
- * execute after the previous loadTextures finishes
- * @param textures the list of textures to load
- * @param callback optional callback to invoke once textures have been loaded
- */
-export function loadTextures(textures: string[], callback?: () => void): void {
-    // const filtered = new Set<string>(textures.filter((t) => t && !PIXI.Loader.shared.resources[t]));
-    // for (const texture of filtered) {
-    //     backlogTextures.add(texture);
-    // }
-
-    // if (callback) {
-    //     backlogCallbacks.push(callback);
-    // }
-
-    // if (backlogTextures.size) {
-    //     // we have textures to load
-    //     if (PIXI.Loader.shared.loading) {
-    //         return; // we'll get to them later
-    //     }
-    //     // else nothing is loading, so let's load the backlog now
-
-    //     const nowLoading = new Set(backlogTextures);
-    //     const nowCallbacks = backlogCallbacks.slice();
-    //     backlogTextures.clear();
-    //     backlogCallbacks.length = 0;
-
-    //     for (const texture of nowLoading) {
-    //         // PIXI.Assets.add({
-    //         //     url: texture,
-    //         //     key: texture,
-    //         //     crossOrigin: true,
-    //         // });
-    //         PIXI.Loader.shared.add({
-    //             url: texture,
-    //             key: texture,
-    //             crossOrigin: true,
-    //         });
-    //     }
-
-    //     PIXI.Loader.shared.load(() => {
-    //         for (const name of nowLoading) {
-    //             const texture = PIXI.Loader.shared.resources[name].texture;
-    //             if (texture) {
-    //                 const baseTexture = texture.baseTexture;
-    //                 baseTexture.scaleMode = PIXI.SCALE_MODES.LINEAR;
-    //                 baseTexture.mipmap = true;
-    //                 // TODO: is this needed?
-    //                 // PIXI.utils.BaseTextureCache[name].scaleMode = PIXI.SCALE_MODES.LINEAR;
-
-    //                 baseTexture.update();
-    //             }
-    //         }
-
-    //         for (const nowCallback of nowCallbacks) {
-    //             nowCallback();
-    //         }
-
-    //         loadTextures([]);
-    //     });
-    // }
-    // else {
-    //     if (!PIXI.Loader.shared.loading) {
-    //         // nothing to load and nothing is loading, means all textures are
-    //         // already loaded, just invoke the callbacks
-    //         const nowCallbacks = backlogCallbacks.slice();
-    //         backlogCallbacks.length = 0;
-    //         for (const nowCallback of nowCallbacks) {
-    //             nowCallback();
-    //         }
-    //     }
-    // }
 }
 
 /**
@@ -262,7 +180,7 @@ export function wrapStyledText(text: string, width: number, normalStyle: PIXI.Te
         }
 
         if (cutoff || newline) {
-            let pixiText: PIXI.Text;
+            let pixiText: PIXI.Text | null = null;
             if (currentLine) {
                 pixiText = new PIXI.Text(currentLine, currentStyle);
 
@@ -310,10 +228,10 @@ export function autoSizeAndWrapStyledText(text: string, width: number, height: n
                                           collisions: PIXICircleOrRectangle[] = [],
                                           centerHorizontally: boolean = false,
                                           centerVertically: boolean = false,
-): PIXI.Container {
+): PIXI.Container | null {
     let resizing = true;
     while (resizing) {
-        if (normalStyle.fontSize <= 0) {
+        if (normalStyle.fontSize as number <= 0) {
             // we'll never fit it, abort!
             return null;
         }

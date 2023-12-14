@@ -6,7 +6,7 @@ import { stripTagsFromString } from "src/utils/";
 
 function addTitlesTo(columns: IColumnData[]): void {
     for (const column of columns) {
-        let name: string = column.name;
+        let name: string = column.name!;
 
         if (name === "Delete") {
             continue; // skip, special column we add that is not a normal option
@@ -117,8 +117,8 @@ export const cardsHeadings: IColumnData[] = [
     {
         name: "Oversized",
         type: "boolean",
-        transform: (checked: RowValue, row: IRowData) => {
-            if (checked && row.values.type !== "Ally" && row.values.type !== "Shadowspawn") {
+        transform: (checked: RowValue, row?: IRowData) => {
+            if (row && row.values.type !== "Ally" && row.values.type !== "Shadowspawn") {
                 return false;
             }
             return checked;
